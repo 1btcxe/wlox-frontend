@@ -95,7 +95,7 @@
 <!-- main js -->
 <script type="text/javascript" src="js/ops.js?v=20141209"></script>
 
-<? if ($CFG->self == 'index.php' || $CFG->self == 'order-book.php') { ?>
+<? if ($CFG->self == 'index.php' || $CFG->self == 'order-book.php' || $CFG->self == 'btc_to_currency.php') { ?>
 <!-- flot -->
 <script type="text/javascript" src="js/flot/jquery.flot.js"></script>
 <script type="text/javascript" src="js/flot/jquery.flot.time.js"></script>
@@ -107,7 +107,7 @@
 <script src="https://www.authy.com/form.authy.min.js" type="text/javascript"></script>
 <? } ?>
 
-<? if ($CFG->self == 'index.php') { ?>
+<? if ($CFG->self == 'index.php' || $CFG->self == 'btc_to_currency.php') { ?>
 <!-- countdown -->
 <script type="text/javascript" src="js/countdown/jquery.countdown.js"></script>
 <? ($CFG->language == 'es') ? '<script type="text/javascript" src="js/countdown/jquery.countdown-es.js"></script>' : '' ?>

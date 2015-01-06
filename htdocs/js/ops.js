@@ -1146,7 +1146,6 @@ $(document).ready(function() {
 	$('#language_selector').bind("keyup change", function(){
 		var lang = $(this).val();
 		var url = $('#url_'+'index_php'+'_'+lang).val();
-		
 		window.location.href = url;
 	});
 	

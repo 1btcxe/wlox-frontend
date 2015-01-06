@@ -13,10 +13,22 @@
   <loc>https://1btcxe.com/es/index.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/index.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/index.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/contact.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/contacto.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/%D1%81%D0%B2%D1%8F%D0%B7%D0%B0%D1%82%D1%8C%D1%81%D1%8F.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/%E8%81%94%E7%B3%BB.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/login.php</loc>
@@ -28,10 +40,22 @@
   <loc>https://1btcxe.com/es/registro.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/%D1%80%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/%E6%B3%A8%E5%86%8C.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/order-book.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/libreta-de-ordenes.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0-%D0%B7%D0%B0%D1%8F%D0%B2%D0%BE%D0%BA.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/%E8%AE%A2%E8%B4%A7%E7%B0%BF.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/our-security.php</loc>
@@ -40,10 +64,22 @@
   <loc>https://1btcxe.com/es/nuestra-seguridad.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/%D0%BD%D0%B0%D1%88%D0%B0-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/%E6%88%91%E4%BB%AC%E7%9A%84%E5%AE%89%E5%85%A8.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/how-to-register.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/como-registrarse.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/%D0%BA%D0%B0%D0%BA-%D0%B7%D0%B0%D1%80%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%D1%81%D1%8F.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/%E6%B3%A8%E5%86%8C.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/fee-schedule.php</loc>
@@ -52,13 +88,22 @@
   <loc>https://1btcxe.com/es/tarifas-y-comisiones.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/%D0%BA%D0%BE%D0%BC%D0%B8%D1%81%D1%81%D0%B8%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5-%D1%81%D0%B1%D0%BE%D1%80%D1%8B.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/%E6%89%8B%E7%BB%AD%E8%B4%B9.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/about.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/nosotros.php</loc>
 </url>
 <url>
-  <loc>https://1btcxe.com/contest-explain.php</loc>
+  <loc>https://1btcxe.com/ru/%D0%BE%D0%B1.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/%E5%AF%B9%E4%BA%8E.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/news.php</loc>
@@ -67,10 +112,22 @@
   <loc>https://1btcxe.com/es/noticias.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/%E6%B6%88%E6%81%AF.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/terms.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/terminos.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/%E6%9D%A1%E4%BB%B6.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/what-are-bitcoins.php</loc>
@@ -79,16 +136,34 @@
   <loc>https://1btcxe.com/es/que-son-los-bitcoins.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/%D1%87%D1%82%D0%BE-%D1%82%D0%B0%D0%BA%D0%BE%D0%B5-%D0%91%D0%B8%D1%82%D0%BA%D0%BE%D0%B9%D0%BD.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/%E4%BB%80%E4%B9%88%E6%98%AF%E6%AF%94%E7%89%B9%E5%B8%81.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/how-bitcoin-works.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/como-funciona-bitcoin.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/%D0%BA%D0%B0%D0%BA-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%B5%D1%82-%D0%91%D0%B8%D1%82%D0%BA%D0%BE%D0%B9%D0%BD.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/reset_2fa.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/reiniciar_2fa.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/%D1%81%D0%B1%D1%80%D0%BE%D1%81-2fa.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/%E5%A4%8D%E4%BD%8D%E5%8F%8C%E5%9B%A0%E7%B4%A0%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/forgot.php</loc>
@@ -100,10 +175,22 @@
   <loc>https://1btcxe.com/es/ils-to-btc.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/ils-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/ils-to-btc.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/eur-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/eur-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/eur-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/eur-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/cny-to-btc.php</loc>
@@ -112,10 +199,22 @@
   <loc>https://1btcxe.com/es/cny-to-btc.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/cny-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/cny-to-btc.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/gbp-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/gbp-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/gbp-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/gbp-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/jpy-to-btc.php</loc>
@@ -124,10 +223,22 @@
   <loc>https://1btcxe.com/es/jpy-to-btc.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/jpy-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/jpy-to-btc.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/cad-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/cad-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/cad-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/cad-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/bgn-to-btc.php</loc>
@@ -136,10 +247,22 @@
   <loc>https://1btcxe.com/es/bgn-to-btc.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/bgn-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/bgn-to-btc.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/czk-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/czk-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/czk-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/czk-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/dkk-to-btc.php</loc>
@@ -148,10 +271,22 @@
   <loc>https://1btcxe.com/es/dkk-to-btc.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/dkk-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/dkk-to-btc.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/hkd-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/hkd-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/hkd-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/hkd-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/hrk-to-btc.php</loc>
@@ -160,10 +295,22 @@
   <loc>https://1btcxe.com/es/hrk-to-btc.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/hrk-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/hrk-to-btc.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/huf-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/huf-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/huf-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/huf-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/inr-to-btc.php</loc>
@@ -172,16 +319,10 @@
   <loc>https://1btcxe.com/es/inr-to-btc.php</loc>
 </url>
 <url>
-  <loc>https://1btcxe.com/ltl-to-btc.php</loc>
+  <loc>https://1btcxe.com/ru/inr-to-btc.php</loc>
 </url>
 <url>
-  <loc>https://1btcxe.com/es/ltl-to-btc.php</loc>
-</url>
-<url>
-  <loc>https://1btcxe.com/lvl-to-btc.php</loc>
-</url>
-<url>
-  <loc>https://1btcxe.com/es/lvl-to-btc.php</loc>
+  <loc>https://1btcxe.com/zh/inr-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/mxn-to-btc.php</loc>
@@ -190,10 +331,22 @@
   <loc>https://1btcxe.com/es/mxn-to-btc.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/mxn-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/mxn-to-btc.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/nok-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/nok-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/nok-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/nok-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/nzd-to-btc.php</loc>
@@ -202,10 +355,22 @@
   <loc>https://1btcxe.com/es/nzd-to-btc.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/nzd-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/nzd-to-btc.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/pln-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/pln-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/pln-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/pln-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/ron-to-btc.php</loc>
@@ -214,10 +379,22 @@
   <loc>https://1btcxe.com/es/ron-to-btc.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/ron-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/ron-to-btc.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/rub-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/rub-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/rub-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/rub-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/sek-to-btc.php</loc>
@@ -226,10 +403,22 @@
   <loc>https://1btcxe.com/es/sek-to-btc.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/sek-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/sek-to-btc.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/sgd-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/sgd-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/sgd-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/sgd-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/thb-to-btc.php</loc>
@@ -238,10 +427,22 @@
   <loc>https://1btcxe.com/es/thb-to-btc.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/thb-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/thb-to-btc.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/try-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/try-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/try-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/try-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/zar-to-btc.php</loc>
@@ -250,9 +451,21 @@
   <loc>https://1btcxe.com/es/zar-to-btc.php</loc>
 </url>
 <url>
+  <loc>https://1btcxe.com/ru/zar-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/zar-to-btc.php</loc>
+</url>
+<url>
   <loc>https://1btcxe.com/usd-to-btc.php</loc>
 </url>
 <url>
   <loc>https://1btcxe.com/es/usd-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/ru/usd-to-btc.php</loc>
+</url>
+<url>
+  <loc>https://1btcxe.com/zh/usd-to-btc.php</loc>
 </url>
 </urlset>
