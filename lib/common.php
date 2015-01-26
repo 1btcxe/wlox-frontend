@@ -1,7 +1,6 @@
 <?php 
 /* Load Libraries */
 include '../cfg/cfg.php';
-include 'dblib.php';
 include 'stdlib.php';
 include 'session.php';
 include 'autoload.php';
@@ -11,7 +10,7 @@ if (!empty($_SERVER["HTTPS"]))
 
 ini_set('session.cookie_httponly',1);
 session_start();
-session_regenerate_id();
+session_regenerate_id(true);
 
 /* Common Info */
 API::add('Lang','getTable');
