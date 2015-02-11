@@ -51,6 +51,8 @@
 .mobilebanner .line{background: url("../../../../images/opacity-line.png") repeat-x scroll left top rgba(0, 0, 0, 0);height: 1px;}
 .mobilebanner .text{color: #fff;font-size: 15px;margin: 15px 10px 20px 10px;}
 
+.tp-caption.large_text_two.caption_ru {font-size: 48px;}
+
 /*------------------*/
 /*	SITE STRUCTURE
 /*------------------------------------------------------*/
