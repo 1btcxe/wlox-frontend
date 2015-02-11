@@ -12,12 +12,14 @@ API::add('Stats','getCurrent',array($currency_info['id']));
 API::add('Transactions','get',array(false,false,5,$currency1));
 API::add('Orders','get',array(false,false,5,$currency1,false,false,1));
 API::add('Orders','get',array(false,false,5,$currency1,false,false,false,false,1));
+API::add('Currencies','getRecord',array('BTC'));
 $query = API::send();
 
 $stats = $query['Stats']['getCurrent']['results'][0];
 $transactions = $query['Transactions']['get']['results'][0];
 $bids = $query['Orders']['get']['results'][0];
 $asks = $query['Orders']['get']['results'][1];
+$btc_info = $query['Currencies']['getRecord']['results'][0];
 $currencies = $CFG->currencies;
 $page_title = strip_tags(str_replace('[currency]',$currency_symbol,Lang::string('home-landing-currency')));
 $meta_desc = String::substring(strip_tags(str_replace('[currency]','<strong>'.$currency_symbol.'</strong>',Lang::string('home-landing-currency-explain'))),300);
@@ -34,7 +36,7 @@ else
 <div class="fresh_projects global_stats">
 	<div class="clearfix mar_top6"></div>
 	<div class="container">
-    	<h1 style="margin-bottom:5px;"><?= str_replace('[currency]','<strong>'.$currency_symbol.'</strong>',Lang::string('home-landing-currency')) ?></h1>
+    	<h1 style="margin-bottom:5px;"><?= str_replace('BTC',$btc_info['name_'.$CFG->language],str_replace('[currency]','<strong>'.$currency_info['name_'.$CFG->language].'</strong>',Lang::string('home-landing-currency'))) ?></h1>
         <p class="explain"><?= str_replace('[currency]','<strong>'.$currency_symbol.'</strong>',Lang::string('home-landing-currency-explain')) ?></p>
          <div class="mar_top3"></div>
         <a class="but_user" href="<?= Lang::url('register.php') ?>"><i class="fa fa-user"></i> <?= str_replace('[currency]','<strong>'.$currency_symbol.'</strong>',Lang::string('home-landing-sign-up')) ?></a>
