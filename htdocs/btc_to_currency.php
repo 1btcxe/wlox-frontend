@@ -1,7 +1,7 @@
 <?php
 include '../lib/common.php';
 
-$_SESSION['currency'] = ereg_replace("[^a-z]", "",$_REQUEST['currency']);
+$_SESSION['currency'] = preg_replace("/[^a-z]/", "",$_REQUEST['currency']);
 
 $currency1 = $_SESSION['currency'];
 $currency_symbol = strtoupper($currency1);
