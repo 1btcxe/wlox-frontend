@@ -1,3 +1,7 @@
+User-agent: Yandex
+Allow: /ru
+Disallow: /
+
 User-Agent: *
 Disallow: 
 Disallow: /ckeditor
