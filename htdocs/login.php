@@ -3,7 +3,7 @@
 include '../lib/common.php';
 
 if (stristr($_SERVER["SERVER_NAME"],'www.'))
-	Link::redirect('http://1btcxe.com/login.php',$_REQUEST);
+	Link::redirect('https://1btcxe.com/login.php',$_REQUEST);
 
 $page_title = Lang::string('home-login');
 $user1 = (!empty($_REQUEST['login']['user'])) ? preg_replace("/[^0-9]/", "",$_REQUEST['login']['user']) : false;
