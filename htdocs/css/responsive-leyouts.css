@@ -1,5 +1,11 @@
 /* Responsive CSS Styles Table of Contents */
 
+@media only screen and (min-width: 1169px){
+	.mobilebanner { height: 380px;padding: 100px 0 0 50px;}
+	.mobilebanner h1 { font-size:58px;margin-bottom: 20px;}
+	.mobilebanner .text { font-size: 16px;line-height: 26px;}
+}
+
 @media only screen and (min-width: 1000px) and (max-width: 1169px){
 
 .container {
@@ -460,8 +466,11 @@ a.show_hide{
 .mobilebanner{
 	display:block;
 }
+.mobilebanner .text{
+	margin:15px 10px 5px;	
+}
 a.button_slider {
-	margin: 0 0 15px 10px;
+	margin: 15px 0 15px 10px;
 }
 .container {
 	width: 448px;
@@ -534,22 +543,6 @@ a.button_slider {
 	margin-top: 9px;
 	margin-bottom: 22px;
 	background:url(../images/logo.png) no-repeat center top;
-}
-
-.popup .contain1 {
-    padding-top:48px;
-}
-
-.popup h1 {
-	font-size: 28px;
-}
-
-.popup .starting_in {
-	font-size: 17px;
-}
-
-.popup .button_slider {
-    display:none;
 }
 
 ul.tci_list {
@@ -1155,6 +1148,9 @@ a.show_hide{
 .mobilebanner{
 	display:block;
 }
+.mobilebanner .text{
+	margin:15px 10px 5px;	
+}
 .balances{margin-left:0;}
 .starting_in.rank {line-height: 36px;}
 .container {
@@ -1230,22 +1226,6 @@ a.show_hide{
 	background:url(../images/logo.png) no-repeat center top;
 }
 
-.popup .contain1 {
-    padding-top:48px;
-}
-
-.popup h1 {
-	font-size: 28px;
-}
-
-.popup .starting_in {
-    display: none;
-}
-
-.popup .button_slider {
-    display:none;
-}
-
 ul.tci_list {
 	float:left;
 	clear: left;
@@ -1303,7 +1283,7 @@ h3{line-height: 33px;}
 .pagination_label{display:none;}
 
 a.button_slider {
-	margin: 0 0 15px 10px;
+	margin:15px 0 15px 10px;
 }
 
 .slider_sec_box{
@@ -1467,7 +1447,9 @@ a.button_slider {
 	width: 100%;
 	margin-right: 0%;
 }
-
+.footer .container {
+	margin-left: 15px;
+}
 .copyright_info .one_half{
 	width: 100%;
 	margin-right: 0%;

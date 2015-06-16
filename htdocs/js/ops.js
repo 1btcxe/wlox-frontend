@@ -45,8 +45,8 @@ function graphPriceHistory(timeframe,currency) {
 	     	});
 			
 			var date_options = { year: "numeric", month: "short",day: "numeric" };
-			axes = plot.getAxes();
-			dataset = plot.getData();
+			var axes = plot.getAxes();
+			var dataset = plot.getData();
 			var left_offset = 30;
 			var bottom_offset = 50;
 			var flip;
@@ -55,44 +55,41 @@ function graphPriceHistory(timeframe,currency) {
 			
 			$("#graph_price_history").bind("plothover", function (event, pos, item) {
 				plot.unhighlight();
-				latestPosition = pos;
 				
 				if (pos.x < axes.xaxis.min || pos.x > axes.xaxis.max || pos.y < axes.yaxis.min || pos.y > axes.yaxis.max) {
 					$('#tooltip').css('display','none');
 					return false;
 				}
 				
-				if (!updateLegendTimeout) {
-					updateLegendTimeout = setTimeout(updateLegend, 50);
-				}
-				
-				if (graph_point == undefined)
-					return false;
-				
-				date = new Date(parseInt(graph_point[0]));
-				$('#tooltip').css('display','block');
-				$('#tooltip .date').html($('#javascript_mon_'+date.getMonth()).val()+' '+date.getDate()+', '+date.getFullYear());
-				$('#tooltip .price').html(currency1+' '+graph_point[1]);
-				
-				var x_pix = dataset[graph_i].xaxis.p2c(graph_point[0]);
-				var y_pix = dataset[graph_i].yaxis.p2c(graph_point[1]);
-				max_x = dataset[graph_i].xaxis.p2c(axes.xaxis.max);
-	
-				if ((max_x - x_pix) < $('#tooltip').width())
-					flip = true;
-				else
-					flip = false;
-				
-				if (!flip) {
-					$('#tooltip').css('left',(x_pix+left_offset)+'px');
-					$('#tooltip').css('top',(y_pix-bottom_offset)+'px');
-				}
-				else {
-					$('#tooltip').css('left',(x_pix-$('#tooltip').width())+'px');
-					$('#tooltip').css('top',(y_pix-bottom_offset)+'px');
-				}
-				
-				plot.highlight(graph_i,graph_j);
+				updateLegend(pos,axes,dataset,true,function(graph_point,graph_i,graph_j) {
+					if (graph_point == undefined)
+						return false;
+					
+					date = new Date(parseInt(graph_point[0]));
+					$('#tooltip').css('display','block');
+					$('#tooltip .date').html($('#javascript_mon_'+date.getMonth()).val()+' '+date.getDate()+', '+date.getFullYear());
+					$('#tooltip .price').html(currency1+' '+graph_point[1]);
+					
+					var x_pix = dataset[graph_i].xaxis.p2c(graph_point[0]);
+					var y_pix = dataset[graph_i].yaxis.p2c(graph_point[1]);
+					max_x = dataset[graph_i].xaxis.p2c(axes.xaxis.max);
+		
+					if ((max_x - x_pix) < $('#tooltip').width())
+						flip = true;
+					else
+						flip = false;
+					
+					if (!flip) {
+						$('#tooltip').css('left',(x_pix+left_offset)+'px');
+						$('#tooltip').css('top',(y_pix-bottom_offset)+'px');
+					}
+					else {
+						$('#tooltip').css('left',(x_pix-$('#tooltip').width())+'px');
+						$('#tooltip').css('top',(y_pix-bottom_offset)+'px');
+					}
+					
+					plot.highlight(graph_i,graph_j);
+				});
 			}); 
 			
 			$("#graph_price_history").remove('.tp-loader');
@@ -192,67 +189,74 @@ function graphOrders(json_data) {
  	});
 	
 	var date_options = { year: "numeric", month: "short",day: "numeric" };
-	axes = plot.getAxes();
-	dataset = plot.getData();
+	var axes = plot.getAxes();
+	var dataset = plot.getData();
 	var left_offset = 30;
 	var bottom_offset = 50;
 	var flip;
 	var max_x;
 	var currency1 = currency.toUpperCase();
+	var last_type = false;
 	$("#graph_orders").bind("plothover", function (event, pos, item) {
 		plot.unhighlight();
-		latestPosition = pos;
 		
 		if (pos.x < axes.xaxis.min || pos.x > axes.xaxis.max || pos.y < axes.yaxis.min || pos.y > axes.yaxis.max) {
 			$('#tooltip').css('display','none');
 			return false;
 		}
 		
-		if (!updateLegendTimeout) {
-			updateLegendTimeout = setTimeout(updateLegend, 50);
-		}
+		updateLegend(pos,axes,dataset,false,function(graph_point,graph_i,graph_j) {
+			var ask = (graph_i == 1);
+			
+			if (!graph_point || graph_point == 0)
+				return false;
+			
+			$('#tooltip').css('display','block');
+			$('#tooltip .price').html(currency1+' '+formatCurrency(graph_point[0]));
 
-		var ask = false;
-		if (pos.x >= dataset[graph_i1].data[0][0]) {
-			graph_point = graph_point1;
-			graph_i = graph_i1;
-			graph_j = graph_j1;
-			ask = true;
-		}
-		
-		$('#tooltip').css('display','block');
-		$('#tooltip .price').html(currency1+' '+formatCurrency(graph_point[0]));
-
-		if (!ask) {
-			$('#tooltip .bid span').html(graph_point[1]);
-			$('#tooltip .bid').css('display','block');
-			$('#tooltip .ask').css('display','none');
-		}
-		else {
-			$('#tooltip .ask span').html(graph_point[1]);
-			$('#tooltip .ask').css('display','block');
-			$('#tooltip .bid').css('display','none');
-		}
-		
-		var x_pix = dataset[graph_i].xaxis.p2c(graph_point[0]);
-		var y_pix = dataset[graph_i].yaxis.p2c(graph_point[1]);
-		max_x = dataset[graph_i].xaxis.p2c(axes.xaxis.max);
-
-		if ((max_x - x_pix) < $('#tooltip').width())
-			flip = true;
-		else
-			flip = false;
-		
-		if (!flip) {
-			$('#tooltip').css('left',(x_pix+left_offset)+'px');
-			$('#tooltip').css('top',(y_pix-bottom_offset)+'px');
-		}
-		else {
-			$('#tooltip').css('left',(x_pix-$('#tooltip').width())+'px');
-			$('#tooltip').css('top',(y_pix-bottom_offset)+'px');
-		}
-		
-		plot.highlight(graph_i,graph_j);
+			if (last_type != graph_i) {
+				if (graph_i > 0)
+					$('#tooltip .price').addClass('alt');
+				else
+					$('#tooltip .price').removeClass('alt');
+			}
+	
+			if (!ask) {
+				$('#tooltip .bid span').html(formatCurrency(graph_point[1]));
+				if (last_type != graph_i) {
+					$('#tooltip .bid').css('display','block');
+					$('#tooltip .ask').css('display','none');
+				}
+			}
+			else {
+				$('#tooltip .ask span').html(formatCurrency(graph_point[1]));
+				if (last_type != graph_i) {
+					$('#tooltip .ask').css('display','block');
+					$('#tooltip .bid').css('display','none');
+				}
+			}
+			
+			var x_pix = dataset[graph_i].xaxis.p2c(graph_point[0]);
+			var y_pix = dataset[graph_i].yaxis.p2c(graph_point[1]);
+			max_x = dataset[graph_i].xaxis.p2c(axes.xaxis.max);
+			last_type = graph_i;
+	
+			if ((max_x - x_pix) < $('#tooltip').width())
+				flip = true;
+			else
+				flip = false;
+			
+			if (!flip) {
+				$('#tooltip').css('left',(x_pix+left_offset)+'px');
+				$('#tooltip').css('top',(y_pix-bottom_offset)+'px');
+			}
+			else {
+				$('#tooltip').css('left',(x_pix-$('#tooltip').width())+'px');
+				$('#tooltip').css('top',(y_pix-bottom_offset)+'px');
+			}
+			
+			plot.highlight(graph_i,graph_j);
+		});
 	}); 
 	
 	$("#graph_price_history").remove('.tp-loader');
@@ -269,46 +273,50 @@ function graphControls() {
 	});
 }
 
-var updateLegendTimeout = null;
-var latestPosition = null;
-var graph_point;
-var graph_point1;
-var axes;
-var dataset;
-var graph_i;
-var graph_j;
-var graph_i1;
-var graph_j1;
-function updateLegend() {
-	updateLegendTimeout = null;
-	var pos = latestPosition;
+function updateLegend(pos,axes,dataset,single_dataset,callback) {
 	if (pos.x < axes.xaxis.min || pos.x > axes.xaxis.max || pos.y < axes.yaxis.min || pos.y > axes.yaxis.max) {
-		return;
+		return false;
 	}
-	var i, j;
-	var already = false;
-	for (i = 0; i < dataset.length; ++i) {
-		var series = dataset[i];
-		// Find the nearest points, x-wise
-		for (j = 0; j < series.data.length; ++j) {
-			if (series.data[j][0] >= pos.x) {
-				if (!already) {
-					graph_point = series.data[j];
-					graph_i = i;
-					graph_j = j;
-					already = true;
-					break;
-				}
-				else {
-					graph_point1 = series.data[j];
-					graph_i1 = i;
-					graph_j1 = j;
-					break;
-				}
-			}
+	
+	if (single_dataset) {
+		if (!dataset || !dataset[0].data || dataset[0].data.length == 0)
+			return false;
+		
+		var series = dataset[0].data;
+		var graph_i = 0;
+	}
+	else {
+		if (dataset[0] && dataset[0].data && pos.x <= dataset[0].data[0][0]) {
+			var series = dataset[0].data;
+			var graph_i = 0;
 		}
-		already = true;
+		else if (dataset[1] && dataset[1].data && pos.x >= dataset[1].data[0][0]) {
+			var series = dataset[1].data;
+			var graph_i = 1;
+		}
+		else
+			return false;
 	}
+	
+	var diff = null;
+	var last_diff = null;
+	var graph_j = null;
+	var graph_point = null;
+
+	for (i in series) {
+		if (!pos.x || !series[i][0])
+			continue;
+		
+		diff = pos.x - parseFloat(series[i][0]);
+		if (last_diff && Math.abs(diff) > Math.abs(last_diff))
+			break;
+		
+		graph_j = i;
+		graph_point = series[i];
+		last_diff = diff;
+	}
+	
+	callback(graph_point,graph_i,graph_j);
 }
 
 function updateTransactions() {
@@ -1194,6 +1202,18 @@ function blink() {
 	},300);
 }
 
+function confirmDeleteAll(uniq,e) {
+	e.preventDefault();
+	
+	if (!uniq)
+		return false;
+	
+    var r = confirm($('#order-cancel-all-conf').val());
+    if (r == true) {
+    	window.location.href = 'open-orders.php?delete_all=1&uniq='+uniq;
+    }
+}
+
 $(document).ready(function() {
 	if ($("#graph_price_history").length > 0) {
 		var currency = $('#graph_price_history_currency').val();
@@ -1291,6 +1311,31 @@ $(document).ready(function() {
 			$(first_text).focus();
 	}
 	
+	$(window).scroll(function(){
+        if ($(this).scrollTop() > 100) {
+            $('.scrollup').fadeIn();
+        } else {
+            $('.scrollup').fadeOut();
+        }
+    });
+
+    $('.scrollup').click(function(){
+        $("html, body").animate({ scrollTop: 0 }, 500);
+        return false;
+    });
+    
+    selectnav('tiny', {
+		label: '--- Navigation --- ',
+		indent: '-'
+	});
+	
+    ddsmoothmenu.init({
+    	mainmenuid: "menu",
+    	orientation: 'h',
+    	classname: 'menu',
+    	contentsource: "markup"
+    })
+    
 	filtersUpdate();
 	paginationUpdate();
 	switchBuyCurrency();
@@ -1303,3 +1348,133 @@ $(document).ready(function() {
 	updateTransactionsList();
 	blink();
 });
+
+// Sticky Menu Core
+var Modernizr = function () {}
+jQuery(function(t){var n,e,i,o,r,s,a,u,l,h,c,p,d,f,g,m,v,y,$,w,C,x,k,b,T,I,H,M,P,S,z,O,q,A,F,L,B,D,N,V,E,K,_;return K=t(window),z=t(document),window.App={},n=t("body, html"),o=t("#header"),s=t("#headerPush"),i=t("#footer"),O="easeInOutExpo",k="/wp-content/themes/KIND",b=39,C=37,P=38,v=40,y=27,N=navigator.userAgent,q=N.match(/(Android|iPhone|BlackBerry|Opera Mini)/i),A=N.match(/(iPad|Kindle)/i),E=function(){return window.innerHeight||K.height()},_=function(){return window.innerWidth||K.width()},V=function(t){return K.resize(function(){return t()}),K.bind("orientationchange",function(){return t()})},r=o.find(".button"),m=o.find("#trueHeader"),D=m.outerHeight(),L=0===t("#masthead").length&&0===t("#slideshow").length,B=m.offset().top,F=B+5*D,setInterval(function(){var t;return t=K.scrollTop(),o.css({height:o.outerHeight()}),t>=B?(o.addClass("sticky"),0>=B||r.hasClass("inv")&&r.removeClass("transparent inv")):(o.removeClass("sticky"),0>=B||r.hasClass("inv")||r.addClass("transparent inv")),t>=F?o.addClass("condensed"):o.removeClass("condensed")},10),1===(c=t("#slideshow")).length&&(I=function(){function t(){this.$slideshow=c,this.$slides=this.$slideshow.find(".slide"),this.max=this.$slides.length-1}return t.prototype.autoplay=function(){var t=this;if(0!==this.max)return this.interval=setInterval(function(){return t.next()},6e3),this},t.prototype.clear=function(){return clearInterval(this.interval)},t.prototype.goToSlide=function(t){var n,e,i=this;if(t!==this.current)return null!=this.interval&&this.clear(),t>this.max&&(t=0),0>t&&(t=this.max),this.$slides.removeClass("active"),this.$slides.eq(t).addClass("active"),this.$h2=this.$slides.eq(t).find("h2"),setTimeout(function(){return i.typeOutSteps()},1e3),(n=this.$slides.eq(t).find(".product_pledged"))&&(e=Math.round(parseInt(n.text())),n.text((""+e).replace(/(\d)(?=(\d{3})+(?!\d))/g,"$1,")),n.css({opacity:1})),this.current=t,this.autoplay(),this},t.prototype.next=function(){return this.goToSlide(this.current+1)},t.prototype.prev=function(){return this.goToSlide(this.current-1)},t.prototype.typeOutSteps=function(){var t,n,e,i,o,r,s=this;return n=0,i=this.$h2.data().sequences.split(","),t=e=i[n],r=function(r){var a,u;return null==r&&(r=0),n!==i.length?(u=0,a=function(){var l;return r++,l=t.substring(0,r),s.$h2.text(l),s.$h2.addClass("typing"),clearInterval(u),r!==t.length?u=setInterval(a,s.human()):(n++,s.$h2.removeClass("typing"),n!==i.length?(r=0,e=t,t=i[n],setTimeout(o,s.human(10))):void 0)},a()):void 0},r(),o=function(){var n,i,o,a,u,l,h,c,p,d,f,g;for(a=e.split(" "),n=t.split(" "),p="",l=0,c=f=0,g=a.length;g>f;c=++f)d=a[c],d===n[c]&&(l++,l>c&&(p+=d+" "));return u=t.length,h=p.length>0?p.length-1:0,o=0,i=function(){var t;return t=e.substring(0,u),s.$h2.text(t),s.$h2.addClass("typing"),u--,clearInterval(o),u===h?(s.$h2.removeClass("typing"),setTimeout(function(){return r(h)},s.human(5))):o=setInterval(i,s.human())},i()},this},t.prototype.human=function(t){return null==t&&(t=1),Math.round(170*Math.random()+30)*t},t}(),T=new I,setTimeout(function(){return T.goToSlide(0)},100),t("#slideDecor").bind("click tap",function(){return n.stop(1,1).animate({scrollTop:t("#content").offset().top-100},660,O)}),f=t("#theVideo"),t("#slideshow .button.transparent").on("click tap",function(t){return t.preventDefault(),n.stop(1,1).animate({scrollTop:f.offset().top-o.outerHeight()},450,function(){return S(f.find("iframe"))})})),Modernizr.csstransitions&&(l=t("[data-parallax]")).length>=1&&K.bind("load scroll touchmove",function(){var t,n,e;return e=K.scrollTop(),n=parseFloat(.35*e),n-=148-n,t="center "+n+"px",l.css({backgroundPosition:t})}),1===(g=t("#timeline")).length&&(M=function(){function n(){this.$timeline=g,this.$fx=this.$timeline.find("#timelineFx"),this.$items=this.$timeline.find("article")}return n.prototype.checkPosition=function(n){return null==n&&(n=K.scrollTop()),this.$items.each(function(e,i){var o;return i=t(i),o=i.offset().top,n>=o-K.height()?i.css({opacity:1}):void 0}),this},n.prototype.resizeFx=function(){var t;if(null!=this.$timeline)return t=this.$timeline.outerHeight(),t-=this.$timeline.find("article:visible:last-child").outerHeight(),this.$fx.css({height:t}),this},n}(),H=new M,K.load(function(){return H.resizeFx()}),setInterval(function(){return H.checkPosition()},100)),w=function(){function t(){this.zoom=15,this.lat=30.191969,this.long=-98.084782}return t.prototype.init=function(){return this.map=new GMaps({div:"#mapCanvas",zoom:this.zoom,lat:this.lat,lng:this.long,zoomControlOpt:{style:"SMALL",position:"TOP_LEFT"},zoomControl:!0,panControl:!0,streetViewControl:!0,mapTypeControl:!1,scrollwheel:!1}),this.addMarker(),this},t.prototype.addMarker=function(){return this.map.addMarker({lat:this.lat,lng:this.long,icon:k+"/assets/images/icon-marker.png"}),this},t}(),1===(u=t("#mapCanvas")).length&&($=new w,window.onload=function(){return $.init()},K.bind("load resize",function(){var t;return t=K.height()-o.outerHeight()+72,888>t&&(t=888),u.css({height:t}),$.map.setCenter($.lat,$.long)})),1===(e=t("#faqListing")).length&&e.find(".faqs").isotope({itemSelector:".faq"}),(p=t(".specs")).length>=1&&p.each(function(){var n,e,i;return i=t(this),e=i.find("figure"),n=i.find("aside"),e.next().is("aside")&&e.outerHeight()<n.outerHeight()?e.css({height:n.outerHeight()+50}):void 0}),1===(d=t("#thePosts")).length&&d.infinitescroll({navSelector:"#postNav",nextSelector:"#postNav a:first-child",itemSelector:"#thePosts .post"}),1===(h=t("#popup")).length&&(x=function(){function n(){var n=this;this.$popup=h,this.$content=this.$popup.find("#popupContent"),this.$popup.add(t("#close")).bind("click tap",function(){return n.close()}),this.$content.bind("click tap",function(t){return t.stopPropagation()}),K.bind("keydown",function(t){return t.keyCode===y?n.close():void 0}),this.$content.find("a").bind("click tap",function(){return window.location=t(this).attr("href")})}return n.prototype.open=function(n){var e=this;return t("#popupContent-load").empty().append(t(n).html()),this.$popup.stop(1,1).fadeIn(750,function(){var t;return 1===(t=e.$popup.find("iframe")).length?S(t):void 0}),this},n.prototype.close=function(){var t=this;return this.$popup.stop(1,1).fadeOut(750,function(){return t.$popup.find("#popupContent-load").empty()}),this},n}(),window.App.PopupModal=new x),S=function(t){var n,e;return n=t[0],e=n.src,e.match(/autoplay/)?(n.src=e.replace("autoplay=0","autoplay=1"),console.log(n.src)):n.src+=0>e.indexOf("?")?"?autoplay=1":"&autoplay=1"},t('[data-action="revealVideo"]').on("click tap",function(){var n,e,i;return i=t(this),e=i.parents("figure"),n=e.find("iframe"),n.addClass("over"),S(n)}),t("iframe:not(.skip)").each(function(n,e){var i,o;return e=t(this)[0],o="wmode=transparent",i=e.src,e.src+=0>i.indexOf("?")?"?"+o:"&"+o}),1===(a=t(".id-widget-wrap .main-btn")).length?(a.text("Back Us"),a.css({opacity:1})):void 0});
+
+/* SelectNav.js (v. 0.1)
+ * Converts your <ul>/<ol> navigation into a dropdown list for small screens */
+window.selectnav=function(){"use strict";var a=function(a,b){function l(a){var b;a||(a=window.event),a.target?b=a.target:a.srcElement&&(b=a.srcElement),b.nodeType===3&&(b=b.parentNode),b.value&&(window.location.href=b.value)}function m(a){var b=a.nodeName.toLowerCase();return b==="ul"||b==="ol"}function n(a){for(var b=1;document.getElementById("selectnav"+b);b++);return a?"selectnav"+b:"selectnav"+(b-1)}function o(a){i++;var b=a.children.length,c="",k="",l=i-1;if(!b)return;if(l){while(l--)k+=g;k+=" "}for(var p=0;p<b;p++){var q=a.children[p].children[0],r=q.innerText||q.textContent,s="";d&&(s=q.className.search(d)!==-1||q.parentElement.className.search(d)!==-1?j:""),e&&!s&&(s=q.href===document.URL?j:""),c+='<option value="'+q.href+'" '+s+">"+k+r+"</option>";if(f){var t=a.children[p].children[1];t&&m(t)&&(c+=o(t))}}return i===1&&h&&(c='<option value="">'+h+"</option>"+c),i===1&&(c='<img class="stickylogo" src="images/favicon-32.png" /><select class="selectnav" id="'+n(!0)+'">'+c+"</select>"),i--,c}a=document.getElementById(a);if(!a)return;if(!m(a))return;document.documentElement.className+=" js";var c=b||{},d=c.activeclass||"active",e=typeof c.autoselect=="boolean"?c.autoselect:!0,f=typeof c.nested=="boolean"?c.nested:!0,g=c.indent||"→",h=c.label||"- Navigation -",i=0,j=" selected ";a.insertAdjacentHTML("afterend",o(a));var k=document.getElementById(n());return k.addEventListener&&k.addEventListener("change",l),k.attachEvent&&k.attachEvent("onchange",l),k};return function(b,c){a(b,c)}}();
+
+//** Smooth Navigational Menu- By Dynamic Drive DHTML code library: http://www.dynamicdrive.com
+//** Script Download/ instructions page: http://www.dynamicdrive.com/dynamicindex1/ddlevelsmenu/
+var ddsmoothmenu={
+arrowimages: {down:[], right:[]},
+transition: {overtime:300, outtime:300}, //duration of slide in/ out animation, in milliseconds
+shadow: {enable:false, offsetx:5, offsety:5}, //enable shadow?
+showhidedelay: {showdelay: 100, hidedelay: 200}, //set delay in milliseconds before sub menus appear and disappear, respectively
+// end cfg
+detectwebkit: navigator.userAgent.toLowerCase().indexOf("applewebkit")!=-1, //detect WebKit browsers (Safari, Chrome etc)
+detectie6: document.all && !window.XMLHttpRequest,
+
+getajaxmenu:function($, setting){ //function to fetch external page containing the panel DIVs
+	var $menucontainer=$('#'+setting.contentsource[0]) //reference empty div on page that will hold menu
+	$menucontainer.html("Loading Menu...")
+	$.ajax({
+		url: setting.contentsource[1], //path to external menu file
+		async: true,
+		error:function(ajaxrequest){
+			$menucontainer.html('Error fetching content. Server Response: '+ajaxrequest.responseText)
+		},
+		success:function(content){
+			$menucontainer.html(content)
+			ddsmoothmenu.buildmenu($, setting)
+		}
+	})
+},
+
+
+buildmenu:function($, setting){
+	var smoothmenu=ddsmoothmenu
+	var $mainmenu=$("#"+setting.mainmenuid+">ul") //reference main menu UL
+	$mainmenu.parent().get(0).className=setting.classname || "ddsmoothmenu"
+	var $headers=$mainmenu.find("ul").parent()
+	$headers.hover(
+		function(e){
+			$(this).children('a:eq(0)').addClass('selected')
+		},
+		function(e){
+			$(this).children('a:eq(0)').removeClass('selected')
+		}
+	)
+	$headers.each(function(i){ //loop through each LI header
+		var $curobj=$(this).css({}) //reference current LI header
+		var $subul=$(this).find('ul:eq(0)').css({display:'block'})
+		$subul.data('timers', {})
+		this._dimensions={w:this.offsetWidth, h:this.offsetHeight, subulw:$subul.outerWidth(), subulh:$subul.outerHeight()}
+		this.istopheader=$curobj.parents("ul").length==1? true : false //is top level header?
+		$subul.css({top:this.istopheader && setting.orientation!='v'? this._dimensions.h+"px" : 0})
+		$curobj.children("a:eq(0)").css(this.istopheader? {paddingRight: smoothmenu.arrowimages.down[2]} : {})
+		if (smoothmenu.shadow.enable){
+			this._shadowoffset={x:(this.istopheader?$subul.offset().left+smoothmenu.shadow.offsetx : this._dimensions.w), y:(this.istopheader? $subul.offset().top+smoothmenu.shadow.offsety : $curobj.position().top)} //store this shadow's offsets
+			if (this.istopheader)
+				$parentshadow=$(document.body)
+			else{
+				var $parentLi=$curobj.parents("li:eq(0)")
+				$parentshadow=$parentLi.get(0).$shadow
+			}
+			this.$shadow=$('<div class="ddshadow'+(this.istopheader? ' toplevelshadow' : '')+'"></div>').prependTo($parentshadow).css({left:this._shadowoffset.x+'px', top:this._shadowoffset.y+'px'})  //insert shadow DIV and set it to parent node for the next shadow div
+		}
+		$curobj.hover(
+			function(e){
+				var $targetul=$subul //reference UL to reveal
+				var header=$curobj.get(0) //reference header LI as DOM object
+				clearTimeout($targetul.data('timers').hidetimer)
+				$targetul.data('timers').showtimer=setTimeout(function(){
+					header._offsets={left:$curobj.offset().left, top:$curobj.offset().top}
+					var menuleft=header.istopheader && setting.orientation!='v'? 0 : header._dimensions.w
+					menuleft=(header._offsets.left+menuleft+header._dimensions.subulw>$(window).width())? (header.istopheader && setting.orientation!='v'? -header._dimensions.subulw+header._dimensions.w : -header._dimensions.w) : menuleft //calculate this sub menu's offsets from its parent
+					if ($targetul.queue().length<=1){ //if 1 or less queued animations
+						$targetul.css({left:menuleft+"px", width:header._dimensions.subulw+'px'}).animate({height:'show',opacity:'show'}, ddsmoothmenu.transition.overtime)
+						if (smoothmenu.shadow.enable){
+							var shadowleft=header.istopheader? $targetul.offset().left+ddsmoothmenu.shadow.offsetx : menuleft
+							var shadowtop=header.istopheader?$targetul.offset().top+smoothmenu.shadow.offsety : header._shadowoffset.y
+							if (!header.istopheader && ddsmoothmenu.detectwebkit){ //in WebKit browsers, restore shadow's opacity to full
+								header.$shadow.css({opacity:1})
+							}
+							header.$shadow.css({overflow:'', width:header._dimensions.subulw+'px', left:shadowleft+'px', top:shadowtop+'px'}).animate({height:header._dimensions.subulh+'px'}, ddsmoothmenu.transition.overtime)
+						}
+					}
+				}, ddsmoothmenu.showhidedelay.showdelay)
+			},
+			function(e){
+				var $targetul=$subul
+				var header=$curobj.get(0)
+				clearTimeout($targetul.data('timers').showtimer)
+				$targetul.data('timers').hidetimer=setTimeout(function(){
+					$targetul.animate({height:'hide', opacity:'hide'}, ddsmoothmenu.transition.outtime)
+					if (smoothmenu.shadow.enable){
+						if (ddsmoothmenu.detectwebkit){ //in WebKit browsers, set first child shadow's opacity to 0, as "overflow:hidden" doesn't work in them
+							header.$shadow.children('div:eq(0)').css({opacity:0})
+						}
+						header.$shadow.css({overflow:'hidden'}).animate({height:0}, ddsmoothmenu.transition.outtime)
+					}
+				}, ddsmoothmenu.showhidedelay.hidedelay)
+			}
+		) //end hover
+	}) //end $headers.each()
+	$mainmenu.find("ul").css({display:'none', visibility:'visible'})
+},
+
+init:function(setting){
+	if (typeof setting.customtheme=="object" && setting.customtheme.length==2){ //override default menu colors (default/hover) with custom set?
+		var mainmenuid='#'+setting.mainmenuid
+		var mainselector=(setting.orientation=="v")? mainmenuid : mainmenuid+', '+mainmenuid
+		document.write('<style type="text/css">\n'
+			+mainselector+' ul li a {background:'+setting.customtheme[0]+';}\n'
+			+mainmenuid+' ul li a:hover {background:'+setting.customtheme[1]+';}\n'
+		+'</style>')
+	}
+	this.shadow.enable=(document.all && !window.XMLHttpRequest)? false : this.shadow.enable //in IE6, always disable shadow
+	jQuery(document).ready(function($){ //ajax menu?
+		if (typeof setting.contentsource=="object"){ //if external ajax menu
+			ddsmoothmenu.getajaxmenu($, setting)
+		}
+		else{ //else if markup menu
+			ddsmoothmenu.buildmenu($, setting)
+		}
+	})
+}
+
+}
