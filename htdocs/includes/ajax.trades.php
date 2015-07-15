@@ -19,15 +19,15 @@ elseif (empty($_REQUEST['get10'])) {
 	$limit = (!$user) ? 30 : false;
 }
 
-if (!empty($_REQUEST['last_price'])) {
+if (!empty($_REQUEST['last_price']) && $notrades) {
 	API::add('Transactions','get',array(false,false,1,$currency1));
 	
 	if ($currency1)
 		API::add('User','getAvailable');
 }
 
-API::add('Orders','get',array(false,false,$limit,$currency1,$user,false,1));
-API::add('Orders','get',array(false,false,$limit,$currency1,$user,false,false,false,1));
+API::add('Orders','get',array(false,false,$limit,$currency1,$user,false,1,false,false,$user));
+API::add('Orders','get',array(false,false,$limit,$currency1,$user,false,false,false,1,$user));
 $query = API::send();
 
 $return['asks'][] = $query['Orders']['get']['results'][1];
@@ -40,8 +40,8 @@ if (!$notrades) {
 
 if (!empty($_REQUEST['last_price'])) {
 	$return['last_price'] = $query['Transactions']['get']['results'][0][0]['btc_price'];
-	$return['last_price_curr'] = $last_trans_currency = (strtolower($query['Transactions']['get']['results'][0][0]['currency']) == $currency1) ? '' : ((strtolower($query['Transactions']['get']['results'][0][0]['currency1']) == $currency1) ? '' : ' ('.$query['Transactions']['get']['results'][0][0]['currency1'].')');
-	$return['fa_symbol'] = $query['Transactions']['get']['results'][0][0]['fa_symbol'];
+	$return['last_price_curr'] = ($query['Transactions']['get']['results'][0][0]['currency'] == $currency_info['id']) ? '' : (($query['Transactions']['get']['results'][0][0]['currency1'] == $currency_info['id']) ? '' : ' ('.$CFG->currencies[$query['Transactions']['get']['results'][0][0]['currency1']]['currency'].')');
+	$return['fa_symbol'] = $CFG->currencies[$query['Transactions']['get']['results'][0][0]['currency1']]['fa_symbol'];
 	$return['last_trans_color'] = ($query['Transactions']['get']['results'][0][0]['maker_type'] == 'sell') ? 'price-green' : 'price-red';
 	
 	if ($currency1) {

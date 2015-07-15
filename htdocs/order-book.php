@@ -11,19 +11,20 @@ elseif (empty($_REQUEST['currency']) && empty($_SESSION['currency']) && empty(Us
 elseif (!empty($_REQUEST['currency']))
 	$_SESSION['currency'] = preg_replace("/[^a-z]/", "",$_REQUEST['currency']);
 	
-$currency1 = strtolower($_SESSION['currency']);
+$currency1 = (!empty($CFG->currencies[strtoupper($_SESSION['currency'])])) ? strtolower($_SESSION['currency']) : 'usd';
 $currency_symbol = strtoupper($currency1);
 $currency_info = $CFG->currencies[$currency_symbol];
 
-API::add('Orders','get',array(false,false,false,$currency1,false,false,1,false,false,1));
-API::add('Orders','get',array(false,false,false,$currency1,false,false,false,false,1,1));
+API::add('Orders','get',array(false,false,false,$currency1,false,false,1));
+API::add('Orders','get',array(false,false,false,$currency1,false,false,false,false,1));
 API::add('Transactions','get',array(false,false,1,$currency1));
 $query = API::send();
 
 $bids = $query['Orders']['get']['results'][0];
 $asks = $query['Orders']['get']['results'][1];
 $last_transaction = $query['Transactions']['get']['results'][0][0];
-$last_trans_currency = (strtolower($last_transaction['currency']) == $currency1) ? false : ((strtolower($last_transaction['currency1']) == $currency1) ? false : ' ('.$last_transaction['currency1'].')');
+$last_trans_currency = ($last_transaction['currency'] == $currency_info['id']) ? false : (($last_transaction['currency1'] == $currency_info['id']) ? false : ' ('.$CFG->currencies[$last_transaction['currency1']]['currency'].')');
+$last_trans_symbol = ($last_transaction['currency'] == $currency_info['id'] || $last_transaction['currency1'] == $currency_info['id']) ? $currency_info['fa_symbol'] : $CFG->currencies[$last_transaction['currency1']]['fa_symbol'];
 $last_trans_color = ($last_transaction['maker_type'] == 'sell') ? 'price-green' : 'price-red';
 
 include 'includes/head.php';
@@ -67,7 +68,7 @@ include 'includes/head.php';
 					</li>
 					<li>
 						<label for="last_price"><?= Lang::string('home-stats-last-price') ?></label>
-						<input type="text" id="last_price" class="<?= $last_trans_color ?>" value="<?= $last_transaction['fa_symbol'].number_format($last_transaction['btc_price'],2).$last_trans_currency ?>" disabled="disabled" />
+						<input type="text" id="last_price" class="<?= $last_trans_color ?>" value="<?= $last_trans_symbol.number_format($last_transaction['btc_price'],2).$last_trans_currency ?>" disabled="disabled" />
 						<a target="_blank" href="https://support.1btcxe.com/support/solutions/articles/1000146628" title="<?= Lang::string('order-book-last-price-explain') ?>"><i class="fa fa-question-circle"></i></a>
 					</li>
 				</ul>
@@ -89,11 +90,11 @@ include 'includes/head.php';
 						foreach ($bids as $bid) {
 							$min_bid = (empty($min_bid) || $bid['btc_price'] < $min_bid) ? $bid['btc_price'] : $min_bid;
 							$max_bid = (empty($max_bid) || $bid['btc_price'] > $max_bid) ? $bid['btc_price'] : $max_bid;
+							$mine = (!empty(User::$info['user']) && $bid['user_id'] == User::$info['user'] && $bid['btc_price'] == $bid['fiat_price']) ? '<a class="fa fa-user" href="open-orders.php?id='.$bid['id'].'" title="'.Lang::string('home-your-order').'"></a>' : '';
 							
-							$mine = ($bid['mine']) ? '<a class="fa fa-user" href="open-orders.php?id='.$bid['id'].'" title="'.Lang::string('home-your-order').'"></a>' : '';
 							echo '
 					<tr id="bid_'.$bid['id'].'" class="bid_tr">
-						<td>'.$mine.$currency_info['fa_symbol'].'<span class="order_price">'.number_format($bid['btc_price'],2).'</span> '.(($bid['btc_price'] != $bid['fiat_price']) ? '<a title="'.str_replace('[currency]',$bid['currency_abbr'],Lang::string('orders-converted-from')).'" class="fa fa-exchange" href="" onclick="return false;"></a>' : '').'</td>
+						<td>'.$mine.$currency_info['fa_symbol'].'<span class="order_price">'.number_format($bid['btc_price'],2).'</span> '.(($bid['btc_price'] != $bid['fiat_price']) ? '<a title="'.str_replace('[currency]',$CFG->currencies[$bid['currency']]['currency'],Lang::string('orders-converted-from')).'" class="fa fa-exchange" href="" onclick="return false;"></a>' : '').'</td>
 						<td><span class="order_amount">'.number_format($bid['btc'],8).'</span></td>
 						<td>'.$currency_info['fa_symbol'].'<span class="order_value">'.number_format(($bid['btc_price'] * $bid['btc']),2).'</span></td>
 					</tr>';
@@ -120,11 +121,11 @@ include 'includes/head.php';
 						foreach ($asks as $ask) {
 							$min_ask = (empty($min_ask) || $ask['btc_price'] < $min_ask) ? $ask['btc_price'] : $min_ask;
 							$max_ask = (empty($max_ask) || $ask['btc_price'] > $max_ask) ? $ask['btc_price'] : $max_ask;
+							$mine = (!empty(User::$info['user']) && $ask['user_id'] == User::$info['user'] && $ask['btc_price'] == $ask['fiat_price']) ? '<a class="fa fa-user" href="open-orders.php?id='.$ask['id'].'" title="'.Lang::string('home-your-order').'"></a>' : '';
 							
-							$mine = ($ask['mine']) ? '<a class="fa fa-user" href="open-orders.php?id='.$ask['id'].'" title="'.Lang::string('home-your-order').'"></a>' : '';
 							echo '
 					<tr id="ask_'.$ask['id'].'" class="ask_tr">
-						<td>'.$mine.$currency_info['fa_symbol'].'<span class="order_price">'.number_format($ask['btc_price'],2).'</span> '.(($ask['btc_price'] != $ask['fiat_price']) ? '<a title="'.str_replace('[currency]',$ask['currency_abbr'],Lang::string('orders-converted-from')).'" class="fa fa-exchange" href="" onclick="return false;"></a>' : '').'</td>
+						<td>'.$mine.$currency_info['fa_symbol'].'<span class="order_price">'.number_format($ask['btc_price'],2).'</span> '.(($ask['btc_price'] != $ask['fiat_price']) ? '<a title="'.str_replace('[currency]',$CFG->currencies[$ask['currency']]['currency'],Lang::string('orders-converted-from')).'" class="fa fa-exchange" href="" onclick="return false;"></a>' : '').'</td>
 						<td><span class="order_amount">'.number_format($ask['btc'],8).'</span></td>
 						<td>'.$currency_info['fa_symbol'].'<span class="order_value">'.number_format(($ask['btc_price'] * $ask['btc']),2).'</span></td>
 					</tr>';

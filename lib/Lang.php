@@ -93,5 +93,14 @@ class Lang {
 			return $HTML;
 		}
 	}
+	
+	public static function jsCurrencies() {
+		global $CFG;
+		
+		foreach ($CFG->currencies as $currency) {
+			echo '<input type="hidden" class="curr_abbr_'.$currency['currency'].'" id="curr_abbr_'.$currency['id'].'" name="'.$currency['id'].'" value="'.$currency['currency'].'" />';
+			echo '<input type="hidden" class="curr_sym_'.$currency['currency'].'" id="curr_sym_'.$currency['id'].'" name="'.$currency['id'].'" value="'.$currency['fa_symbol'].'" />';
+		}
+	}
 }
 ?>
