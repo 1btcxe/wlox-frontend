@@ -122,7 +122,7 @@ elseif ($endpoint == 'balances-and-info') {
 				$query = API::send($nonce1);
 				
 				if (empty($query['error'])) {
-					$return['balances-and-info']['on_hold'] = $query['User']['getBalancesAndInfo']['results'][0];
+					$return['balances-and-info'] = $query['User']['getBalancesAndInfo']['results'][0];
 				}
 				else
 					$return['errors'][] = array('message'=>'Invalid authentication.','code'=>$query['error']);
