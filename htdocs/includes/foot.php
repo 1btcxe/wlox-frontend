@@ -75,7 +75,7 @@
     
         <div class="one_half">
         
-            <b>Copyright &copy; 2014 1BTCXE. All rights reserved.</b>
+            <b>Copyright &copy; 2014 - 2015 1BTCXE. All rights reserved.</b>
             
         </div>
     </div>
