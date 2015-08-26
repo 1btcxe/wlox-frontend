@@ -8,7 +8,7 @@ API::add('News','get',array(1));
 $query = API::send();
 $total = $query['News']['get']['results'][0];
 
-API::add('News','get',array(false,$page1,10));
+API::add('News','get',array(false,$page1,10,1));
 API::add('Transactions','pagination',array('press-releases.php',$page1,$total,10,5,false));
 $query = API::send();
 
