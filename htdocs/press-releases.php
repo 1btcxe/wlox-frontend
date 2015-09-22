@@ -5,15 +5,12 @@ $page1 = (!empty($_REQUEST['page'])) ? ereg_replace("[^0-9]", "",$_REQUEST['page
 $bypass = !empty($_REQUEST['bypass']);
 
 API::add('News','get',array(1));
+API::add('News','get',array(false,$page1,10,1));
 $query = API::send();
+
 $total = $query['News']['get']['results'][0];
-
-API::add('News','get',array(false,$page1,10));
-API::add('Transactions','pagination',array('news.php',$page1,$total,10,5,false));
-$query = API::send();
-
-$news = $query['News']['get']['results'][0];
-$pagination = $query['Transactions']['pagination']['results'][0];
+$news = $query['News']['get']['results'][1];
+$pagination = Content::pagination('press-releases.php',$page1,$total,10,5,false);
 
 $page_title = Lang::string('news');
 
@@ -24,7 +21,7 @@ if (!$bypass) {
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="<?= Lang::url('news.php') ?>"><?= $page_title ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="<?= Lang::url('press-releases.php') ?>"><?= $page_title ?></a></div>
 	</div>
 </div>
 <div class="container">
